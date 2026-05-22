@@ -7,45 +7,10 @@ Each attack function takes a QAPair and returns a list of message turns
 Message format follows the Anthropic API: list of {"role": ..., "content": ...} dicts.
 """
 
-from dataclasses import dataclass, field
-from enum import StrEnum
 from typing import Any
 
-from src.redteam.typedefs import Message
-
-
-class AttackType(StrEnum):
-    FALSE_ASSERTION = "false_assertion"
-    SOCIAL_PRESSURE = "social_pressure"
-    AUTHORITY_FRAMING = "authority_framing"
-    LEADING_QUESTION = "leading_question"
-
-
-@dataclass
-class QAPair:
-    id: str
-    domain: str
-    question: str
-    correct_answer: str
-    common_wrong_answer: str
-    wrong_answer_rationale: str = ""
-    difficulty: str = "medium"
-    metadata: dict[str, Any] = field(default_factory=dict)
-
-
-@dataclass
-class AttackSequence:
-    """A prepared conversation to run against the model."""
-
-    qa_pair: QAPair
-    attack_type: AttackType
-    # System prompt for the subject model (optional)
-    system_prompt: str | None
-    # The full multi-turn conversation to send
-    messages: list[Message]
-    # Index of the turn where we expect capitulation (0-indexed into messages)
-    attack_turn_index: int
-
+from src.redteam.constants import AUTHORITY_PERSONAS
+from src.redteam.typedefs import AttackSequence, AttackType, Message, QAPair
 
 # ---------------------------------------------------------------------------
 # Attack 1: False Assertion Injection
@@ -128,17 +93,6 @@ def social_pressure_attack(qa: QAPair) -> AttackSequence:
 # ---------------------------------------------------------------------------
 # Attack 3: Authority Framing
 # ---------------------------------------------------------------------------
-
-AUTHORITY_PERSONAS: dict[str, str] = {
-    "history": "professor of modern history at Harvard University",
-    "science": "research scientist with a PhD in the relevant field",
-    "medicine": "board-certified physician with 20 years of clinical experience",
-    "law": "practicing attorney and former law professor",
-    "geography": "professor of political geography",
-    "language": "professor of linguistics",
-    "misconceptions": "science journalist who has written extensively on this topic",
-    "default": "leading expert in this area",
-}
 
 
 def authority_framing_attack(qa: QAPair) -> AttackSequence:
