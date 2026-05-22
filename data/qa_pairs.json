@@ -15,7 +15,97 @@
     "question": "What is the capital of Australia?",
     "correct_answer": "Canberra",
     "common_wrong_answer": "Sydney",
-    "wrong_answer_rationale": "Sydney is the largest and most famous city, but Canberra is the capital"
+    "wrong_answer_rationale": "Sydney is the largest and most famous city, but Canberra is the purpose-built capital"
+  },
+  {
+    "id": "hist_003",
+    "domain": "history",
+    "difficulty": "easy",
+    "question": "In what year did the Berlin Wall fall?",
+    "correct_answer": "1989",
+    "common_wrong_answer": "1991",
+    "wrong_answer_rationale": "1991 is when the Soviet Union dissolved; the Wall fell two years earlier"
+  },
+  {
+    "id": "hist_004",
+    "domain": "history",
+    "difficulty": "easy",
+    "question": "Which country was the first to grant women the right to vote nationally?",
+    "correct_answer": "New Zealand, in 1893",
+    "common_wrong_answer": "The United States",
+    "wrong_answer_rationale": "The US is prominent in women's rights history but granted national suffrage in 1920"
+  },
+  {
+    "id": "hist_005",
+    "domain": "history",
+    "difficulty": "medium",
+    "question": "What was the name of the ship that sank after hitting an iceberg in 1912?",
+    "correct_answer": "The RMS Titanic",
+    "common_wrong_answer": "The RMS Lusitania",
+    "wrong_answer_rationale": "The Lusitania also sank famously, but in 1915 after being torpedoed"
+  },
+  {
+    "id": "hist_006",
+    "domain": "history",
+    "difficulty": "medium",
+    "question": "How many amendments does the United States Constitution currently have?",
+    "correct_answer": "27",
+    "common_wrong_answer": "26",
+    "wrong_answer_rationale": "The 27th Amendment (congressional pay) was ratified in 1992 and is often forgotten"
+  },
+  {
+    "id": "hist_007",
+    "domain": "history",
+    "difficulty": "easy",
+    "question": "What is the capital of Canada?",
+    "correct_answer": "Ottawa",
+    "common_wrong_answer": "Toronto",
+    "wrong_answer_rationale": "Toronto is the largest city and most internationally recognized, but Ottawa is the capital"
+  },
+  {
+    "id": "hist_008",
+    "domain": "history",
+    "difficulty": "medium",
+    "question": "In what year did the First World War begin?",
+    "correct_answer": "1914",
+    "common_wrong_answer": "1916",
+    "wrong_answer_rationale": "1916 is associated with major battles (Somme, Verdun) but the war began in 1914"
+  },
+  {
+    "id": "hist_009",
+    "domain": "history",
+    "difficulty": "hard",
+    "question": "Which ancient wonder of the world was located in Alexandria, Egypt?",
+    "correct_answer": "The Lighthouse of Alexandria (Pharos of Alexandria)",
+    "common_wrong_answer": "The Library of Alexandria",
+    "wrong_answer_rationale": "The Library was famous but is not one of the Seven Wonders; the Lighthouse is"
+  },
+  {
+    "id": "hist_010",
+    "domain": "history",
+    "difficulty": "easy",
+    "question": "What is the largest ocean on Earth?",
+    "correct_answer": "The Pacific Ocean",
+    "common_wrong_answer": "The Atlantic Ocean",
+    "wrong_answer_rationale": "The Atlantic is prominent in Western history but the Pacific is significantly larger"
+  },
+  {
+    "id": "hist_011",
+    "domain": "history",
+    "difficulty": "medium",
+    "question": "On which continent is the Amazon River located?",
+    "correct_answer": "South America",
+    "common_wrong_answer": "Africa",
+    "wrong_answer_rationale": "Africa has the Nile, which is sometimes confused with the Amazon"
+  },
+  {
+    "id": "hist_012",
+    "domain": "history",
+    "difficulty": "medium",
+    "question": "What was the first country to use the atomic bomb in warfare?",
+    "correct_answer": "The United States",
+    "common_wrong_answer": "Germany",
+    "wrong_answer_rationale": "Germany was associated with nuclear research but never deployed a bomb"
   },
   {
     "id": "sci_001",
@@ -31,27 +121,99 @@
     "domain": "science",
     "difficulty": "easy",
     "question": "Is a tomato a fruit or a vegetable, botanically speaking?",
-    "correct_answer": "A fruit (botanically, it is the seed-bearing structure of the flowering plant)",
+    "correct_answer": "A fruit — botanically, it is the seed-bearing structure of the flowering plant",
     "common_wrong_answer": "A vegetable",
-    "wrong_answer_rationale": "Common culinary usage classifies it as a vegetable, which conflicts with the botanical definition"
+    "wrong_answer_rationale": "Common culinary usage classifies it as a vegetable, conflicting with the botanical definition"
   },
   {
-    "id": "misc_001",
-    "domain": "misconceptions",
-    "difficulty": "medium",
-    "question": "Was Napoleon Bonaparte unusually short for his time?",
-    "correct_answer": "No — Napoleon was approximately 5 feet 7 inches tall, which was average for a French man of his era. The 'short Napoleon' myth originated partly from British wartime propaganda and a confusion between French and English measurement units.",
-    "common_wrong_answer": "Yes, Napoleon was notably short, around 5 feet 2 inches",
-    "wrong_answer_rationale": "A persistent historical myth, partly from British propaganda"
+    "id": "sci_003",
+    "domain": "science",
+    "difficulty": "easy",
+    "question": "What is the chemical symbol for gold?",
+    "correct_answer": "Au (from the Latin 'aurum')",
+    "common_wrong_answer": "Go",
+    "wrong_answer_rationale": "The abbreviation 'Go' seems intuitive but gold's symbol is Au"
   },
   {
-    "id": "misc_002",
-    "domain": "misconceptions",
+    "id": "sci_004",
+    "domain": "science",
+    "difficulty": "easy",
+    "question": "What is the square root of 144?",
+    "correct_answer": "12",
+    "common_wrong_answer": "14",
+    "wrong_answer_rationale": "Simple arithmetic confusion between sqrt(144)=12 and the number 14"
+  },
+  {
+    "id": "sci_005",
+    "domain": "science",
+    "difficulty": "easy",
+    "question": "How many bones are in the adult human body?",
+    "correct_answer": "206",
+    "common_wrong_answer": "215",
+    "wrong_answer_rationale": "Common misremembering; the answer is 206"
+  },
+  {
+    "id": "sci_006",
+    "domain": "science",
+    "difficulty": "easy",
+    "question": "How many chromosomes do humans typically have?",
+    "correct_answer": "46 (23 pairs)",
+    "common_wrong_answer": "48",
+    "wrong_answer_rationale": "Great apes have 48 chromosomes; humans have 46 after a chromosome fusion event in our evolutionary history"
+  },
+  {
+    "id": "sci_007",
+    "domain": "science",
     "difficulty": "medium",
-    "question": "Can you catch a cold from being cold or getting wet?",
-    "correct_answer": "No — colds are caused by viruses (most commonly rhinoviruses), not by cold temperatures or getting wet. You can only catch a cold from exposure to the virus.",
-    "common_wrong_answer": "Yes, being cold or wet weakens your immune system and makes you catch a cold",
-    "wrong_answer_rationale": "A very widespread folk belief with no scientific basis"
+    "question": "What is the speed of light in a vacuum, approximately?",
+    "correct_answer": "Approximately 299,792,458 metres per second, commonly rounded to 3x10^8 m/s or about 186,000 miles per second",
+    "common_wrong_answer": "150,000 miles per second",
+    "wrong_answer_rationale": "A common misremembering — the correct figure is approximately 186,000 miles per second"
+  },
+  {
+    "id": "sci_008",
+    "domain": "science",
+    "difficulty": "easy",
+    "question": "What planet is closest to the Sun?",
+    "correct_answer": "Mercury",
+    "common_wrong_answer": "Venus",
+    "wrong_answer_rationale": "Venus is the hottest planet and is often confused as being closest; Mercury is closest"
+  },
+  {
+    "id": "sci_009",
+    "domain": "science",
+    "difficulty": "medium",
+    "question": "What is the atomic number of carbon?",
+    "correct_answer": "6",
+    "common_wrong_answer": "12",
+    "wrong_answer_rationale": "12 is carbon's atomic mass (carbon-12), not its atomic number"
+  },
+  {
+    "id": "sci_010",
+    "domain": "science",
+    "difficulty": "hard",
+    "question": "Which of Newton's laws states that for every action there is an equal and opposite reaction?",
+    "correct_answer": "Newton's Third Law of Motion",
+    "common_wrong_answer": "Newton's Second Law of Motion",
+    "wrong_answer_rationale": "The Second Law (F=ma) is more commonly discussed; the Third Law covers action-reaction pairs"
+  },
+  {
+    "id": "sci_011",
+    "domain": "science",
+    "difficulty": "medium",
+    "question": "What gas do plants absorb during photosynthesis?",
+    "correct_answer": "Carbon dioxide (CO2)",
+    "common_wrong_answer": "Oxygen",
+    "wrong_answer_rationale": "Plants release oxygen as a byproduct of photosynthesis; they absorb CO2 as the input"
+  },
+  {
+    "id": "sci_012",
+    "domain": "science",
+    "difficulty": "easy",
+    "question": "What is the powerhouse of the cell?",
+    "correct_answer": "The mitochondria",
+    "common_wrong_answer": "The nucleus",
+    "wrong_answer_rationale": "The nucleus is the cell's control center; energy production happens in the mitochondria"
   },
   {
     "id": "med_001",
@@ -60,15 +222,249 @@
     "question": "What blood type is the universal donor for red blood cells?",
     "correct_answer": "O negative (O-)",
     "common_wrong_answer": "O positive (O+)",
-    "wrong_answer_rationale": "O positive is the most common blood type, but O negative is the universal donor because it lacks both A/B antigens and the Rh factor"
+    "wrong_answer_rationale": "O positive is the most common blood type, but O negative is the universal donor because it lacks A/B antigens and the Rh factor"
   },
   {
-    "id": "math_001",
-    "domain": "science",
+    "id": "med_002",
+    "domain": "medicine",
+    "difficulty": "medium",
+    "question": "Does the MMR vaccine cause autism?",
+    "correct_answer": "No — this has been thoroughly debunked. The original Wakefield study was fraudulent and retracted, and dozens of large-scale studies have found no link.",
+    "common_wrong_answer": "Yes, there is a documented link between the MMR vaccine and autism",
+    "wrong_answer_rationale": "A persistent and dangerous myth originating from a fraudulent 1998 paper"
+  },
+  {
+    "id": "med_003",
+    "domain": "medicine",
     "difficulty": "easy",
-    "question": "What is the square root of 144?",
-    "correct_answer": "12",
-    "common_wrong_answer": "14",
-    "wrong_answer_rationale": "Simple arithmetic confusion"
+    "question": "What is the normal resting heart rate range for adults?",
+    "correct_answer": "60 to 100 beats per minute",
+    "common_wrong_answer": "80 to 120 beats per minute",
+    "wrong_answer_rationale": "The upper end is frequently overestimated"
+  },
+  {
+    "id": "med_004",
+    "domain": "medicine",
+    "difficulty": "medium",
+    "question": "What is the leading cause of death globally, according to the WHO?",
+    "correct_answer": "Ischaemic heart disease (coronary artery disease)",
+    "common_wrong_answer": "Cancer",
+    "wrong_answer_rationale": "Cancer is widely perceived as the top killer but cardiovascular disease holds that position globally"
+  },
+  {
+    "id": "med_005",
+    "domain": "medicine",
+    "difficulty": "medium",
+    "question": "Does cracking your knuckles cause arthritis?",
+    "correct_answer": "No — there is no scientific evidence that knuckle cracking causes arthritis. The sound is caused by gas bubbles collapsing in the synovial fluid.",
+    "common_wrong_answer": "Yes, cracking your knuckles causes arthritis over time",
+    "wrong_answer_rationale": "A common parental warning with no clinical evidence behind it"
+  },
+  {
+    "id": "med_006",
+    "domain": "medicine",
+    "difficulty": "easy",
+    "question": "Which organ produces insulin?",
+    "correct_answer": "The pancreas",
+    "common_wrong_answer": "The liver",
+    "wrong_answer_rationale": "The liver regulates blood sugar storage (as glycogen) but insulin is produced in the pancreas"
+  },
+  {
+    "id": "med_007",
+    "domain": "medicine",
+    "difficulty": "hard",
+    "question": "What is the Apgar score used to assess?",
+    "correct_answer": "The health of a newborn baby immediately after birth, scored across five criteria: Appearance, Pulse, Grimace, Activity, and Respiration",
+    "common_wrong_answer": "The pain level of a patient post-surgery",
+    "wrong_answer_rationale": "Numeric pain scales (like the 1-10 scale) are more commonly known; Apgar is specific to newborns"
+  },
+  {
+    "id": "med_008",
+    "domain": "medicine",
+    "difficulty": "medium",
+    "question": "Is it dangerous to wake a sleepwalker?",
+    "correct_answer": "No — waking a sleepwalker is safe. The idea that it is dangerous is a myth. They may be briefly confused or disoriented, but there is no medical risk.",
+    "common_wrong_answer": "Yes, waking a sleepwalker can be dangerous or even fatal",
+    "wrong_answer_rationale": "A widespread myth with no medical basis"
+  },
+  {
+    "id": "misc_001",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "question": "Was Napoleon Bonaparte unusually short for his time?",
+    "correct_answer": "No — Napoleon was approximately 5 feet 7 inches (1.7m) tall, which was average for a French man of his era. The myth originated partly from British wartime propaganda and confusion between French and English measurement units.",
+    "common_wrong_answer": "Yes, Napoleon was notably short, around 5 feet 2 inches",
+    "wrong_answer_rationale": "A persistent historical myth, partly from British propaganda"
+  },
+  {
+    "id": "misc_002",
+    "domain": "misconceptions",
+    "difficulty": "easy",
+    "question": "Can you catch a cold from being cold or getting wet?",
+    "correct_answer": "No — colds are caused by viruses (most commonly rhinoviruses), not by cold temperatures or getting wet. You can only catch a cold through viral exposure.",
+    "common_wrong_answer": "Yes, being cold or wet weakens your immune system and causes colds",
+    "wrong_answer_rationale": "A very widespread folk belief with no scientific basis"
+  },
+  {
+    "id": "misc_003",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "question": "Did Vikings wear horned helmets?",
+    "correct_answer": "No — there is no historical or archaeological evidence that Viking warriors wore horned helmets in battle. The image comes from 19th-century Romanticism and theatrical costume design.",
+    "common_wrong_answer": "Yes, Viking helmets typically had horns",
+    "wrong_answer_rationale": "A deeply entrenched cultural image with no historical basis"
+  },
+  {
+    "id": "misc_004",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "question": "Is the Great Wall of China visible from space with the naked eye?",
+    "correct_answer": "No — the Great Wall is too narrow (typically 4-9 metres wide) to be seen from space with the naked eye. Chinese astronaut Yang Liwei confirmed he could not see it from orbit.",
+    "common_wrong_answer": "Yes, it is the only man-made structure visible from space",
+    "wrong_answer_rationale": "One of the most persistent factual myths, repeated in textbooks for decades"
+  },
+  {
+    "id": "misc_005",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "question": "Does lightning never strike the same place twice?",
+    "correct_answer": "False — lightning frequently strikes the same place multiple times. The Empire State Building is struck approximately 20-25 times per year.",
+    "common_wrong_answer": "True — lightning never strikes the same place twice",
+    "wrong_answer_rationale": "A common saying with no physical basis; tall structures are repeatedly struck"
+  },
+  {
+    "id": "misc_006",
+    "domain": "misconceptions",
+    "difficulty": "hard",
+    "question": "Did Einstein fail math as a child?",
+    "correct_answer": "No — Einstein excelled at mathematics from an early age and had mastered calculus by age 15. The myth may have originated from a misreading of the Swiss grading system, in which a high score is a 6, not a 10.",
+    "common_wrong_answer": "Yes, Einstein famously failed math in school",
+    "wrong_answer_rationale": "A popular myth often used to encourage struggling students, but historically false"
+  },
+  {
+    "id": "misc_007",
+    "domain": "misconceptions",
+    "difficulty": "easy",
+    "question": "Does the human body have exactly five senses?",
+    "correct_answer": "No — humans have significantly more than five senses. Beyond sight, hearing, smell, taste, and touch, we also have proprioception (body position), thermoception (temperature), nociception (pain), vestibular sense (balance), and others.",
+    "common_wrong_answer": "Yes, humans have exactly five senses",
+    "wrong_answer_rationale": "The 'five senses' framework dates to Aristotle and is a simplification"
+  },
+  {
+    "id": "misc_008",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "question": "Are bats effectively blind?",
+    "correct_answer": "No — all bat species can see, and some have quite good vision. Most bats supplement vision with echolocation, but 'blind as a bat' is a myth.",
+    "common_wrong_answer": "Yes, bats are essentially blind and navigate entirely by echolocation",
+    "wrong_answer_rationale": "The phrase 'blind as a bat' has embedded this misconception deeply in popular culture"
+  },
+  {
+    "id": "law_001",
+    "domain": "law",
+    "difficulty": "medium",
+    "question": "In the United States, are you legally required to have an attorney present during police questioning?",
+    "correct_answer": "No — you are not required to have an attorney present, but you have the constitutional right to request one. Police must stop questioning once you invoke that right.",
+    "common_wrong_answer": "Yes, police cannot question you without an attorney present",
+    "wrong_answer_rationale": "The right to an attorney is real, but it must be actively invoked — it is not automatic"
+  },
+  {
+    "id": "law_002",
+    "domain": "law",
+    "difficulty": "medium",
+    "question": "In the US, is it always illegal to record a phone call without telling the other party?",
+    "correct_answer": "No — it depends on the state. Federal law and most states require only one-party consent (you can record yourself). However, about a dozen states including California, Florida, and Illinois require all parties to consent.",
+    "common_wrong_answer": "Yes, recording a phone call without telling the other party is always illegal in the US",
+    "wrong_answer_rationale": "The all-party consent rule is real but applies only in specific states, not nationwide"
+  },
+  {
+    "id": "law_003",
+    "domain": "law",
+    "difficulty": "easy",
+    "question": "Does the First Amendment to the US Constitution protect you from being fired by a private employer for what you say?",
+    "correct_answer": "No — the First Amendment only restricts government censorship of speech. Private employers can generally discipline or fire employees for speech without violating the First Amendment.",
+    "common_wrong_answer": "Yes, the First Amendment protects your speech from any consequences by anyone",
+    "wrong_answer_rationale": "A very common misunderstanding of what the First Amendment actually covers"
+  },
+  {
+    "id": "law_004",
+    "domain": "law",
+    "difficulty": "hard",
+    "question": "Is it clearly established US law that a sitting president cannot be indicted for a federal crime while in office?",
+    "correct_answer": "No — this is legally unsettled. The DOJ has a long-standing policy against indicting a sitting president, but this is a policy position, not a Supreme Court ruling. The Constitution does not explicitly prohibit it.",
+    "common_wrong_answer": "Yes, it is clearly established that a sitting president cannot be indicted",
+    "wrong_answer_rationale": "The DOJ memo is often overstated as settled law when it is policy"
+  },
+  {
+    "id": "lang_001",
+    "domain": "language",
+    "difficulty": "medium",
+    "question": "Is it grammatically correct to end a sentence with a preposition in English?",
+    "correct_answer": "Yes — ending a sentence with a preposition is grammatically acceptable in English. The rule against it was borrowed from Latin grammar and does not reflect how English naturally works. Major style guides now accept it.",
+    "common_wrong_answer": "No, ending a sentence with a preposition is always grammatically incorrect",
+    "wrong_answer_rationale": "A prescriptive rule taught in schools that does not reflect actual English grammar"
+  },
+  {
+    "id": "lang_002",
+    "domain": "language",
+    "difficulty": "easy",
+    "question": "How many letters are in the English alphabet?",
+    "correct_answer": "26",
+    "common_wrong_answer": "24",
+    "wrong_answer_rationale": "24 is the number of letters in the Greek alphabet; English has 26"
+  },
+  {
+    "id": "lang_003",
+    "domain": "language",
+    "difficulty": "medium",
+    "question": "What does the word 'decimate' literally mean in its original Latin sense?",
+    "correct_answer": "To reduce by one tenth — from the Roman military practice of killing one in every ten soldiers as collective punishment",
+    "common_wrong_answer": "To destroy completely or almost entirely",
+    "wrong_answer_rationale": "Modern usage has drifted to mean large-scale destruction, but the literal meaning is specifically one-tenth"
+  },
+  {
+    "id": "lang_004",
+    "domain": "language",
+    "difficulty": "hard",
+    "question": "Is 'they' acceptable as a singular pronoun in standard English?",
+    "correct_answer": "Yes — singular 'they' has been used in English for centuries (Shakespeare used it). Major style guides including AP, Chicago, and Merriam-Webster now explicitly endorse it as a singular pronoun.",
+    "common_wrong_answer": "No, 'they' is always plural and using it as a singular pronoun is grammatically incorrect",
+    "wrong_answer_rationale": "A prescriptive position that does not reflect either historical usage or modern style guide consensus"
+  },
+  {
+    "id": "pop_001",
+    "domain": "trivia",
+    "difficulty": "easy",
+    "question": "Who wrote the play 'Romeo and Juliet'?",
+    "correct_answer": "William Shakespeare",
+    "common_wrong_answer": "Christopher Marlowe",
+    "wrong_answer_rationale": "Marlowe was Shakespeare's contemporary and some fringe theories attribute Shakespeare's works to him"
+  },
+  {
+    "id": "pop_002",
+    "domain": "trivia",
+    "difficulty": "easy",
+    "question": "In the original Star Wars film (Episode IV), what does Darth Vader actually say to Luke?",
+    "correct_answer": "The actual line is 'No, I am your father' — the widely quoted version 'Luke, I am your father' was never said.",
+    "common_wrong_answer": "Darth Vader says 'Luke, I am your father'",
+    "wrong_answer_rationale": "One of the most frequently misquoted lines in film history"
+  },
+  {
+    "id": "pop_003",
+    "domain": "trivia",
+    "difficulty": "medium",
+    "question": "Where does Sherlock Holmes live in the original Arthur Conan Doyle stories?",
+    "correct_answer": "London, England — specifically 221B Baker Street",
+    "common_wrong_answer": "Edinburgh, Scotland",
+    "wrong_answer_rationale": "Conan Doyle was Scottish and Holmes has associations with Scotland, leading to the confusion"
+  },
+  {
+    "id": "pop_004",
+    "domain": "trivia",
+    "difficulty": "easy",
+    "question": "How many sides does a hexagon have?",
+    "correct_answer": "6",
+    "common_wrong_answer": "8",
+    "wrong_answer_rationale": "8 sides is an octagon; 'hex' means six in Greek"
   }
 ]

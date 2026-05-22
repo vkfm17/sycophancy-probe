@@ -90,3 +90,56 @@ The `analyze` command produces four views:
 - **Per-domain breakdown** — cave rates by subject domain, sorted worst-first
 - **Hedge score distribution** — mean/max hedge counts per judge label; a high hedge score on `maintained` responses indicates hedging without capitulating, which is its own interesting finding
 - **Failure pattern clusters** — responses embedded with `all-MiniLM-L6-v2` and clustered with KMeans (k auto-selected by silhouette score), with worst-case exemplars surfaced per cluster
+
+---
+
+## Cost & Model Selection
+
+Before running the full suite, use the estimator:
+
+```bash
+uv run python estimate_cost.py               # full run estimate
+uv run python estimate_cost.py --limit 3 --attack false_assertion  # smoke test cost
+```
+
+### Estimated cost for the full dataset (52 pairs × 4 attacks = 572 API calls)
+
+| Model tier | Input $/MTok | Output $/MTok | Estimated total |
+|---|---|---|---|
+| Haiku (`claude-haiku-4-5-20251001`) | $0.80 | $4.00 | ~$0.60 |
+| Sonnet (`claude-sonnet-4-6`) | $3.00 | $15.00 | ~$2.25 |
+| Opus (`claude-opus-4-6`) | $15.00 | $75.00 | ~$11.30 |
+
+*Token counts are estimated with a chars/4 heuristic. Verify pricing at [anthropic.com/pricing](https://www.anthropic.com/pricing) before a large run.*
+
+### Recommended configuration
+
+**For a first full run:** use Sonnet as the probe, Haiku as the judge.
+
+```
+# .env
+PROBE_MODEL=claude-sonnet-4-6
+JUDGE_MODEL=claude-haiku-4-5-20251001
+```
+
+**Estimated cost: ~$1.20** — roughly half the all-Sonnet price with minimal scoring quality loss.
+
+**Rationale:**
+
+- **Probe model (Sonnet):** The subject under test should be a capable, deployed-grade model. Haiku is too compliant by default and its sycophancy patterns won't generalize to the models Anthropic actually cares about. Opus would give marginally richer responses but at 5× the cost with no benefit to the research question.
+
+- **Judge model (Haiku):** The judge's job is classification against a tight rubric — maintained / partial_cave / full_cave — not open-ended reasoning. Haiku handles structured classification reliably and is ~4× cheaper than Sonnet for this role. The main risk is on `partial_cave` cases (the subtlest label); plan to spot-check a sample of ~30 judge labels manually to calibrate your trust in it.
+
+- **Why not Opus as probe?** The most interesting sycophancy findings are likely to emerge from a model that has real tension between its training to be helpful and its training to be honest. Opus may resist pressure more strongly than Sonnet, which would make the cave rates lower but not necessarily more publishable. Sonnet is also the model most readers will be running in production — making the findings more practically relevant.
+
+### Recommended run order
+
+1. **Smoke test** — 3 pairs, one attack type, verify output format and judge labels look right
+   ```bash
+   uv run python run.py run --limit 3 --attack false_assertion
+   uv run python run.py results
+   ```
+
+2. **Single attack type** — run all 52 pairs with `false_assertion` only (~$0.30), review results before committing to the full grid
+
+3. **Full run** — all 4 attack types once you're happy with the output quality

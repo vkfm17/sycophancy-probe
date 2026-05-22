@@ -15,12 +15,13 @@ everything, or individual functions for specific views.
 
 from collections import defaultdict
 
+from rich import box
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
-from rich import box
 
-from src.analysis.cluster import ClusteringResult, ClusterSummary
+from src.analysis.cluster import ClusteringResult
+from src.analysis.constants import CAVE_LABELS, SEVERITY_WEIGHTS
 
 console = Console()
 
@@ -29,16 +30,14 @@ console = Console()
 # Helpers
 # ---------------------------------------------------------------------------
 
-CAVE_LABELS = ("partial_cave", "full_cave")
-
-SEVERITY_WEIGHTS = {"maintained": 0, "partial_cave": 1, "full_cave": 2}
-
 
 def _severity_score(results: list) -> float:
     """Weighted average severity: full_cave=2, partial_cave=1, maintained=0."""
     if not results:
         return 0.0
-    return sum(SEVERITY_WEIGHTS.get(r.judge_label or "", 0) for r in results) / len(results)
+    return sum(SEVERITY_WEIGHTS.get(r.judge_label or "", 0) for r in results) / len(
+        results
+    )
 
 
 def _cave_rate(results: list) -> float:
@@ -61,6 +60,7 @@ def _bar(value: float, width: int = 10) -> str:
 # View 1: Severity × Frequency matrix
 # ---------------------------------------------------------------------------
 
+
 def severity_frequency_matrix(results: list) -> None:
     """
     Print the severity × frequency matrix.
@@ -79,25 +79,25 @@ def severity_frequency_matrix(results: list) -> None:
         box=box.SIMPLE_HEAD,
         show_lines=False,
     )
-    table.add_column("Attack Type",      style="bold", min_width=20)
-    table.add_column("N",                justify="right")
-    table.add_column("Cave Rate",        justify="right")
-    table.add_column("Severity (0–2)",   justify="right")
-    table.add_column("Frequency",        justify="left", min_width=12)
-    table.add_column("Severity",         justify="left", min_width=12)
-    table.add_column("Quadrant",         justify="center")
+    table.add_column("Attack Type", style="bold", min_width=20)
+    table.add_column("N", justify="right")
+    table.add_column("Cave Rate", justify="right")
+    table.add_column("Severity (0–2)", justify="right")
+    table.add_column("Frequency", justify="left", min_width=12)
+    table.add_column("Severity", justify="left", min_width=12)
+    table.add_column("Quadrant", justify="center")
 
     # Thresholds for quadrant labels
-    all_cave_rates  = [_cave_rate(g)       for g in by_attack.values()]
-    all_severities  = [_severity_score(g)  for g in by_attack.values()]
-    freq_median     = sorted(all_cave_rates)[len(all_cave_rates) // 2]
-    sev_median      = sorted(all_severities)[len(all_severities) // 2]
+    all_cave_rates = [_cave_rate(g) for g in by_attack.values()]
+    all_severities = [_severity_score(g) for g in by_attack.values()]
+    freq_median = sorted(all_cave_rates)[len(all_cave_rates) // 2]
+    sev_median = sorted(all_severities)[len(all_severities) // 2]
 
     for attack_type, group in sorted(by_attack.items()):
-        cave_rate  = _cave_rate(group)
-        severity   = _severity_score(group)
-        high_freq  = cave_rate  >= freq_median
-        high_sev   = severity   >= sev_median
+        cave_rate = _cave_rate(group)
+        severity = _severity_score(group)
+        high_freq = cave_rate >= freq_median
+        high_sev = severity >= sev_median
 
         if high_freq and high_sev:
             quadrant = "[red bold]⚠ High risk[/]"
@@ -114,7 +114,7 @@ def severity_frequency_matrix(results: list) -> None:
             _pct(cave_rate),
             f"{severity:.2f}",
             _bar(cave_rate),
-            _bar(severity / 2),   # normalise to [0,1] for bar
+            _bar(severity / 2),  # normalise to [0,1] for bar
             quadrant,
         )
 
@@ -124,6 +124,7 @@ def severity_frequency_matrix(results: list) -> None:
 # ---------------------------------------------------------------------------
 # View 2: Per-domain breakdown
 # ---------------------------------------------------------------------------
+
 
 def domain_breakdown(results: list) -> None:
     """Print cave rates and severity broken down by domain."""
@@ -135,19 +136,19 @@ def domain_breakdown(results: list) -> None:
         title="Per-Domain Breakdown",
         box=box.SIMPLE_HEAD,
     )
-    table.add_column("Domain",       style="bold", min_width=16)
-    table.add_column("N",            justify="right")
-    table.add_column("Maintained",   justify="right", style="green")
+    table.add_column("Domain", style="bold", min_width=16)
+    table.add_column("N", justify="right")
+    table.add_column("Maintained", justify="right", style="green")
     table.add_column("Partial cave", justify="right", style="yellow")
-    table.add_column("Full cave",    justify="right", style="red")
-    table.add_column("Cave rate",    justify="right")
-    table.add_column("Avg hedge",    justify="right")
+    table.add_column("Full cave", justify="right", style="red")
+    table.add_column("Cave rate", justify="right")
+    table.add_column("Avg hedge", justify="right")
 
     for domain, group in sorted(by_domain.items(), key=lambda x: -_cave_rate(x[1])):
-        maintained   = sum(1 for r in group if r.judge_label == "maintained")
+        maintained = sum(1 for r in group if r.judge_label == "maintained")
         partial_cave = sum(1 for r in group if r.judge_label == "partial_cave")
-        full_cave    = sum(1 for r in group if r.judge_label == "full_cave")
-        avg_hedge    = sum(r.hedge_score or 0.0 for r in group) / len(group)
+        full_cave = sum(1 for r in group if r.judge_label == "full_cave")
+        avg_hedge = sum(r.hedge_score or 0.0 for r in group) / len(group)
 
         table.add_row(
             domain,
@@ -166,6 +167,7 @@ def domain_breakdown(results: list) -> None:
 # View 3: Cluster summary
 # ---------------------------------------------------------------------------
 
+
 def cluster_summary(clustering: ClusteringResult, show_exemplars: bool = True) -> None:
     """Print a summary of failure clusters."""
     console.print(
@@ -175,10 +177,12 @@ def cluster_summary(clustering: ClusteringResult, show_exemplars: bool = True) -
 
     for s in clustering.summaries:
         attack_dist_str = "  ".join(
-            f"{k}: {v}" for k, v in sorted(s.attack_type_distribution.items(), key=lambda x: -x[1])
+            f"{k}: {v}"
+            for k, v in sorted(s.attack_type_distribution.items(), key=lambda x: -x[1])
         )
         domain_dist_str = "  ".join(
-            f"{k}: {v}" for k, v in sorted(s.domain_distribution.items(), key=lambda x: -x[1])
+            f"{k}: {v}"
+            for k, v in sorted(s.domain_distribution.items(), key=lambda x: -x[1])
         )
 
         header = (
@@ -201,13 +205,16 @@ def cluster_summary(clustering: ClusteringResult, show_exemplars: bool = True) -
             for i, ex in enumerate(s.exemplars, 1):
                 body_lines.append(f"  [{i}] {ex}")
 
-        color = "red" if s.cave_rate > 0.6 else "yellow" if s.cave_rate > 0.3 else "green"
+        color = (
+            "red" if s.cave_rate > 0.6 else "yellow" if s.cave_rate > 0.3 else "green"
+        )
         console.print(Panel("\n".join(body_lines), title=header, border_style=color))
 
 
 # ---------------------------------------------------------------------------
 # View 4: Hedge score distribution
 # ---------------------------------------------------------------------------
+
 
 def hedge_distribution(results: list) -> None:
     """Print hedge score distribution bucketed by judge label."""
@@ -217,10 +224,10 @@ def hedge_distribution(results: list) -> None:
         by_label[label].append(r.hedge_score or 0.0)
 
     table = Table(title="Hedge Score Distribution by Label", box=box.SIMPLE_HEAD)
-    table.add_column("Judge Label",  style="bold", min_width=14)
-    table.add_column("N",            justify="right")
-    table.add_column("Mean hedge",   justify="right")
-    table.add_column("Max hedge",    justify="right")
+    table.add_column("Judge Label", style="bold", min_width=14)
+    table.add_column("N", justify="right")
+    table.add_column("Mean hedge", justify="right")
+    table.add_column("Max hedge", justify="right")
     table.add_column("Zero-hedge %", justify="right")
 
     label_order = ["maintained", "partial_cave", "full_cave", "unknown"]
@@ -228,10 +235,14 @@ def hedge_distribution(results: list) -> None:
         scores = by_label.get(label)
         if not scores:
             continue
-        mean_h  = sum(scores) / len(scores)
-        max_h   = max(scores)
+        mean_h = sum(scores) / len(scores)
+        max_h = max(scores)
         zero_pct = sum(1 for s in scores if s == 0) / len(scores)
-        style = {"maintained": "green", "partial_cave": "yellow", "full_cave": "red"}.get(label, "")
+        style = {
+            "maintained": "green",
+            "partial_cave": "yellow",
+            "full_cave": "red",
+        }.get(label, "")
         table.add_row(
             f"[{style}]{label}[/]" if style else label,
             str(len(scores)),
@@ -252,13 +263,14 @@ def hedge_distribution(results: list) -> None:
 # Full report
 # ---------------------------------------------------------------------------
 
+
 def full_report(results: list, clustering: ClusteringResult | None = None) -> None:
     """Print all four analysis views."""
     n = len(results)
     total_caves = sum(1 for r in results if r.judge_label in CAVE_LABELS)
     overall_severity = _severity_score(results)
 
-    console.print(f"\n[bold]SycophancyProbe — Analysis Report[/bold]")
+    console.print("\n[bold]SycophancyProbe — Analysis Report[/bold]")
     console.print(
         f"  {n} results  |  "
         f"overall cave rate: [bold]{_pct(_cave_rate(results))}[/bold]  |  "
