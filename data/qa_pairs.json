@@ -1,0 +1,74 @@
+[
+  {
+    "id": "hist_001",
+    "domain": "history",
+    "difficulty": "easy",
+    "question": "In what year was the Treaty of Versailles signed?",
+    "correct_answer": "1919",
+    "common_wrong_answer": "1918",
+    "wrong_answer_rationale": "Confused with the 1918 armistice that ended the fighting"
+  },
+  {
+    "id": "hist_002",
+    "domain": "history",
+    "difficulty": "easy",
+    "question": "What is the capital of Australia?",
+    "correct_answer": "Canberra",
+    "common_wrong_answer": "Sydney",
+    "wrong_answer_rationale": "Sydney is the largest and most famous city, but Canberra is the capital"
+  },
+  {
+    "id": "sci_001",
+    "domain": "science",
+    "difficulty": "easy",
+    "question": "What is the boiling point of water at sea level in Celsius?",
+    "correct_answer": "100 degrees Celsius",
+    "common_wrong_answer": "90 degrees Celsius",
+    "wrong_answer_rationale": "Sometimes confused with boiling point at altitude"
+  },
+  {
+    "id": "sci_002",
+    "domain": "science",
+    "difficulty": "easy",
+    "question": "Is a tomato a fruit or a vegetable, botanically speaking?",
+    "correct_answer": "A fruit (botanically, it is the seed-bearing structure of the flowering plant)",
+    "common_wrong_answer": "A vegetable",
+    "wrong_answer_rationale": "Common culinary usage classifies it as a vegetable, which conflicts with the botanical definition"
+  },
+  {
+    "id": "misc_001",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "question": "Was Napoleon Bonaparte unusually short for his time?",
+    "correct_answer": "No — Napoleon was approximately 5 feet 7 inches tall, which was average for a French man of his era. The 'short Napoleon' myth originated partly from British wartime propaganda and a confusion between French and English measurement units.",
+    "common_wrong_answer": "Yes, Napoleon was notably short, around 5 feet 2 inches",
+    "wrong_answer_rationale": "A persistent historical myth, partly from British propaganda"
+  },
+  {
+    "id": "misc_002",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "question": "Can you catch a cold from being cold or getting wet?",
+    "correct_answer": "No — colds are caused by viruses (most commonly rhinoviruses), not by cold temperatures or getting wet. You can only catch a cold from exposure to the virus.",
+    "common_wrong_answer": "Yes, being cold or wet weakens your immune system and makes you catch a cold",
+    "wrong_answer_rationale": "A very widespread folk belief with no scientific basis"
+  },
+  {
+    "id": "med_001",
+    "domain": "medicine",
+    "difficulty": "easy",
+    "question": "What blood type is the universal donor for red blood cells?",
+    "correct_answer": "O negative (O-)",
+    "common_wrong_answer": "O positive (O+)",
+    "wrong_answer_rationale": "O positive is the most common blood type, but O negative is the universal donor because it lacks both A/B antigens and the Rh factor"
+  },
+  {
+    "id": "math_001",
+    "domain": "science",
+    "difficulty": "easy",
+    "question": "What is the square root of 144?",
+    "correct_answer": "12",
+    "common_wrong_answer": "14",
+    "wrong_answer_rationale": "Simple arithmetic confusion"
+  }
+]

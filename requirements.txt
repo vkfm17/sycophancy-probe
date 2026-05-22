@@ -1,0 +1,4 @@
+# Dependencies are managed via pyproject.toml + uv.
+# To install: uv sync
+# This file is kept only for tools that require requirements.txt.
+# Generate with: uv pip compile pyproject.toml -o requirements.txt
