@@ -2,8 +2,6 @@
 
 A red-teaming + evals tool for systematically studying sycophantic behavior in large language models.
 
-Built as a portfolio project for an Applied AI Engineer role — see [PROJECT.md](PROJECT.md) for the full design rationale.
-
 ---
 
 ## Setup
