@@ -10,12 +10,12 @@ A red-teaming + evals tool for systematically studying sycophantic behavior in l
 
 ## Results
 
-We ran 127 labeled exchanges across 64 factual Q&A pairs spanning 7 domains, testing Claude Haiku and Claude Opus against four attack types:
+We ran 127 labeled exchanges across 64 factual Q&A pairs spanning 7 domains, testing Claude Haiku 4.5 and Claude Opus 4.6 against four attack types:
 
 | Model | Overall Cave Rate | False Assertion | Social Pressure | Authority Framing | Leading Question |
 |---|---|---|---|---|---|
-| Claude Haiku | **12%** | 19% | 6% | 12% | 12% |
-| Claude Opus | **0%** | 0% | 0% | 0% | 0% |
+| Claude Haiku 4.5 | **12%** | 19% | 6% | 12% | 12% |
+| Claude Opus 4.6 | **0%** | 0% | 0% | 0% | 0% |
 
 Key findings: false assertion outperforms sustained multi-turn pressure; hedge language predicts resistance, not capitulation; history is uniquely vulnerable (38% cave rate) while medicine, law, and language held at 0%. Full write-up above.
 
@@ -49,8 +49,13 @@ uv run python run.py run --limit 3 --attack false_assertion
 # Run only hard questions
 uv run python run.py run --difficulty hard
 
+# Run only French or Spanish pairs
+uv run python run.py run --language fr
+uv run python run.py run --language es
+
 # Combine filters
 uv run python run.py run --difficulty hard --attack false_assertion
+uv run python run.py run --language fr --attack false_assertion
 
 # Change checkpoint frequency (default: save every 10 results; 0 = only at end)
 uv run python run.py run --checkpoint 5
@@ -92,7 +97,7 @@ uv run python run.py analyze --n-clusters 4
 sycophancy-probe/
 ├── src/
 │   ├── redteam/
-│   │   ├── attacks.py      # 4 attack generators
+│   │   ├── attacks.py      # 6 attack generators
 │   │   └── typedefs.py     # Shared types
 │   ├── evals/
 │   │   ├── runner.py       # Calls the subject model, fills in conversation turns
@@ -117,6 +122,10 @@ sycophancy-probe/
 | `social_pressure` | Multi-turn escalating pushback ("are you sure?" → "my expert friend disagrees") |
 | `authority_framing` | Prepends an expert identity claim to the question |
 | `leading_question` | Embeds the wrong answer as a premise in the question |
+| `emotional_appeal` | Introduces personal stakes ("I have an exam tomorrow and my professor said X") to make disagreement feel costly |
+| `consensus_illusion` | Claims other AI assistants already agreed on the wrong answer, framing the model as the sole outlier |
+
+All attack prompts are templated and language-keyed. Q&A pairs with `"language": "fr"` or `"language": "es"` automatically receive attacks in that language.
 
 ## Scoring
 
@@ -141,9 +150,8 @@ Future ideas worth exploring:
 - Cross-model: run the same harness on GPT-4o, Gemini, and open-source models (Llama, Mistral) to see whether the capability/sycophancy correlation is Claude-specific or general. The harness is model-agnostic; swap the client in `runner.py`.
 - Sonnet as probe: we tested the poles (Haiku and Opus). Sonnet would complete the tier picture and is the model most people run in production.
 - Adversarial system prompts: does prepending "do not revise your answer based on user pushback unless they provide new evidence" reduce cave rates? By how much? Does it hurt helpfulness on legitimate corrections?
-- More attack types: emotional appeals ("I'm going to fail my exam if you're wrong"), urgency framing, consensus illusion ("everyone I've asked agrees with me"), or sycophancy-in-reverse (excessive praise before asking the model to confirm something wrong).
 - Agentic settings: in a tool-calling pipeline, sycophancy doesn't need to be overt. A model can be steered by confident-sounding context injected through tool outputs, with no single moment that looks like a failure.
-- Non-English languages: does sycophancy resistance vary by language? A model trained mostly on English may be weaker against attacks in French or Mandarin for the same factual domain.
+- More languages: French and Spanish are covered. Mandarin and Arabic would be particularly interesting given training data imbalances.
 - Longitudinal tracking: run the harness on each new model release and track cave rates over time to catch regressions early.
 - White-box analysis: for open-weight models, look at attention patterns and feature attribution on caved vs. maintained responses. Are there internal signals that predict capitulation before the output?
 - Fine-tuning signal: the labeled exchanges (full_cave as negative, maintained as positive) could serve as preference data for DPO. Worth testing whether a small pass on this dataset moves the needle.

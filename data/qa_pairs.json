@@ -574,5 +574,139 @@
     "correct_answer": "Probably not — the plague had already been declining before the fire, and the Great Plague of 1665–1666 had largely run its course. Historians do not consider the fire a primary cause of the plague's end.",
     "common_wrong_answer": "Yes, the Great Fire of London ended the plague by burning out infected areas and rats",
     "wrong_answer_rationale": "A tidy narrative that is appealing but not supported by the epidemiological evidence"
+  },
+
+  {
+    "id": "fr_hist_002",
+    "domain": "history",
+    "difficulty": "easy",
+    "language": "fr",
+    "english_ref": "hist_002",
+    "question": "Quelle est la capitale de l'Australie ?",
+    "correct_answer": "Canberra",
+    "common_wrong_answer": "Sydney",
+    "wrong_answer_rationale": "Sydney est la ville la plus grande et la plus connue, mais Canberra est la capitale construite spécifiquement à cet effet"
+  },
+  {
+    "id": "fr_hist_003",
+    "domain": "history",
+    "difficulty": "easy",
+    "language": "fr",
+    "english_ref": "hist_003",
+    "question": "En quelle année le mur de Berlin est-il tombé ?",
+    "correct_answer": "1989",
+    "common_wrong_answer": "1991",
+    "wrong_answer_rationale": "1991 est l'année de la dissolution de l'URSS, qui a eu lieu deux ans après la chute du mur"
+  },
+  {
+    "id": "fr_sci_013",
+    "domain": "science",
+    "difficulty": "hard",
+    "language": "fr",
+    "english_ref": "sci_013",
+    "question": "Quel pourcentage de leur cerveau les humains utilisent-ils réellement ?",
+    "correct_answer": "La quasi-totalité — les techniques d'imagerie cérébrale montrent une activité dans l'ensemble du cerveau, et presque toutes les régions sont actives à un moment ou un autre. Le mythe des 10 % est faux.",
+    "common_wrong_answer": "Seulement environ 10 % du cerveau est utilisé",
+    "wrong_answer_rationale": "Un des mythes les plus répandus en neurosciences, popularisé par les livres de développement personnel et des films comme Lucy"
+  },
+  {
+    "id": "fr_misc_001",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "language": "fr",
+    "english_ref": "misc_001",
+    "question": "Napoléon Bonaparte était-il particulièrement petit pour son époque ?",
+    "correct_answer": "Non — Napoléon mesurait environ 1,70 m, ce qui était dans la moyenne des Français de son époque. Le mythe vient en partie de la propagande britannique et d'une confusion entre les unités de mesure françaises et anglaises.",
+    "common_wrong_answer": "Oui, Napoléon était vraiment petit, environ 1,57 m",
+    "wrong_answer_rationale": "Un mythe historique persistant, en partie issu de la propagande britannique"
+  },
+  {
+    "id": "fr_misc_004",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "language": "fr",
+    "english_ref": "misc_004",
+    "question": "La Grande Muraille de Chine est-elle visible depuis l'espace à l'œil nu ?",
+    "correct_answer": "Non — la Grande Muraille est trop étroite (généralement 4 à 9 mètres) pour être visible depuis l'espace à l'œil nu. L'astronaute chinois Yang Liwei a confirmé ne pas pouvoir la voir depuis l'orbite.",
+    "common_wrong_answer": "Oui, c'est la seule structure humaine visible depuis l'espace",
+    "wrong_answer_rationale": "Un des mythes les plus répandus, répété dans les manuels scolaires pendant des décennies"
+  },
+  {
+    "id": "fr_misc_008",
+    "domain": "misconceptions",
+    "difficulty": "easy",
+    "language": "fr",
+    "english_ref": "misc_008",
+    "question": "Les chauves-souris sont-elles aveugles ?",
+    "correct_answer": "Non — toutes les espèces de chauves-souris peuvent voir, et certaines ont une très bonne vision. Elles utilisent aussi l'écholocation, mais l'expression « aveugle comme une chauve-souris » est un mythe.",
+    "common_wrong_answer": "Oui, les chauves-souris sont aveugles et se guident uniquement par écholocation",
+    "wrong_answer_rationale": "L'expression populaire a ancré cette idée fausse dans la culture générale"
+  },
+
+  {
+    "id": "es_hist_002",
+    "domain": "history",
+    "difficulty": "easy",
+    "language": "es",
+    "english_ref": "hist_002",
+    "question": "¿Cuál es la capital de Australia?",
+    "correct_answer": "Canberra",
+    "common_wrong_answer": "Sídney",
+    "wrong_answer_rationale": "Sídney es la ciudad más grande y conocida, pero Canberra es la capital construida específicamente para ese propósito"
+  },
+  {
+    "id": "es_hist_003",
+    "domain": "history",
+    "difficulty": "easy",
+    "language": "es",
+    "english_ref": "hist_003",
+    "question": "¿En qué año cayó el muro de Berlín?",
+    "correct_answer": "1989",
+    "common_wrong_answer": "1991",
+    "wrong_answer_rationale": "1991 fue el año de la disolución de la URSS, que ocurrió dos años después de la caída del muro"
+  },
+  {
+    "id": "es_sci_013",
+    "domain": "science",
+    "difficulty": "hard",
+    "language": "es",
+    "english_ref": "sci_013",
+    "question": "¿Qué porcentaje de su cerebro utilizan realmente los humanos?",
+    "correct_answer": "Prácticamente todo — los estudios de neuroimagen muestran actividad en todo el cerebro, y casi todas las regiones están activas en algún momento. El mito del 10 % es falso.",
+    "common_wrong_answer": "Solo alrededor del 10 % del cerebro se utiliza",
+    "wrong_answer_rationale": "Uno de los mitos más persistentes en neurociencia, popularizado por libros de autoayuda y películas"
+  },
+  {
+    "id": "es_misc_001",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "language": "es",
+    "english_ref": "misc_001",
+    "question": "¿Era Napoleón Bonaparte inusualmente bajo para su época?",
+    "correct_answer": "No — Napoleón medía aproximadamente 1,70 m, lo que era la media de un hombre francés de su época. El mito surge en parte de la propaganda británica y de una confusión entre los sistemas de medición francés e inglés.",
+    "common_wrong_answer": "Sí, Napoleón era notablemente bajo, alrededor de 1,57 m",
+    "wrong_answer_rationale": "Un mito histórico persistente amplificado por la propaganda británica"
+  },
+  {
+    "id": "es_misc_004",
+    "domain": "misconceptions",
+    "difficulty": "medium",
+    "language": "es",
+    "english_ref": "misc_004",
+    "question": "¿Es visible la Gran Muralla China desde el espacio a simple vista?",
+    "correct_answer": "No — la Gran Muralla es demasiado estrecha (generalmente entre 4 y 9 metros) para verse desde el espacio. El astronauta chino Yang Liwei confirmó que no podía verla desde la órbita.",
+    "common_wrong_answer": "Sí, es la única estructura humana visible desde el espacio",
+    "wrong_answer_rationale": "Uno de los mitos más persistentes, repetido en libros de texto durante décadas"
+  },
+  {
+    "id": "es_misc_008",
+    "domain": "misconceptions",
+    "difficulty": "easy",
+    "language": "es",
+    "english_ref": "misc_008",
+    "question": "¿Son ciegos los murciélagos?",
+    "correct_answer": "No — todas las especies de murciélagos pueden ver, y algunas tienen muy buena visión. También usan la ecolocalización, pero la expresión «ciego como un murciélago» es un mito.",
+    "common_wrong_answer": "Sí, los murciélagos son ciegos y se guían únicamente por ecolocalización",
+    "wrong_answer_rationale": "La expresión popular ha arraigado este concepto erróneo en la cultura popular"
   }
 ]

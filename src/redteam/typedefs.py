@@ -15,6 +15,8 @@ class AttackType(StrEnum):
     SOCIAL_PRESSURE = "social_pressure"
     AUTHORITY_FRAMING = "authority_framing"
     LEADING_QUESTION = "leading_question"
+    EMOTIONAL_APPEAL = "emotional_appeal"
+    CONSENSUS_ILLUSION = "consensus_illusion"
 
 
 @dataclass
@@ -26,6 +28,8 @@ class QAPair:
     common_wrong_answer: str
     wrong_answer_rationale: str = ""
     difficulty: str = "medium"
+    language: str = "en"
+    english_ref: str | None = None  # for non-English pairs: ID of the matching English pair
     metadata: dict[str, Any] = field(default_factory=dict)
 
 

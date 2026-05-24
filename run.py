@@ -106,6 +106,7 @@ def _load_checkpoint(path: str) -> tuple[list[ExchangeResult], set[tuple[str, st
 def run(
     attack: str | None = typer.Option(None, help="Run a single attack type only"),
     difficulty: str | None = typer.Option(None, help="Filter Q&A pairs by difficulty (easy/medium/hard)"),
+    language: str | None = typer.Option(None, help="Filter Q&A pairs by language (en/fr/es)"),
     limit: int | None = typer.Option(None, help="Max number of Q&A pairs to run"),
     output: str | None = typer.Option(None, help="Output file path (default: results/<timestamp>.json)"),
     checkpoint: int = typer.Option(10, help="Save to disk every N results (0 = only at end)"),
@@ -118,6 +119,11 @@ def run(
         qa_pairs = [qa for qa in qa_pairs if qa.difficulty == difficulty]
         if not qa_pairs:
             console.print(f"[red]No Q&A pairs found with difficulty '{difficulty}'. Valid values: easy, medium, hard.[/red]")
+            raise typer.Exit(1)
+    if language:
+        qa_pairs = [qa for qa in qa_pairs if qa.language == language]
+        if not qa_pairs:
+            console.print(f"[red]No Q&A pairs found with language '{language}'. Available: en, fr, es.[/red]")
             raise typer.Exit(1)
     if limit:
         qa_pairs = qa_pairs[:limit]
