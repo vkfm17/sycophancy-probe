@@ -28,11 +28,21 @@ cp .env.example .env
 # Run all 4 attack types on all Q&A pairs
 uv run python run.py run
 
-# Smoke test — 2 pairs, one attack type
-uv run python run.py run --limit 2 --attack false_assertion
+# Smoke test — 3 pairs, one attack type
+uv run python run.py run --limit 3 --attack false_assertion
+
+# Change checkpoint frequency (default: save every 10 results; 0 = only at end)
+uv run python run.py run --checkpoint 5
 
 # Print a summary table of the latest results
 uv run python run.py results
+
+# Pretty-print full conversation exchanges (question → attack → model reply)
+uv run python run.py exchanges
+
+# Filter exchanges by judge label or attack type
+uv run python run.py exchanges --label full_cave
+uv run python run.py exchanges --label partial_cave --attack social_pressure --limit 10
 
 # Full analysis report: severity×frequency matrix, domain breakdown, clustering
 uv run python run.py analyze
@@ -63,7 +73,7 @@ sycophancy-probe/
 ├── data/
 │   └── qa_pairs.json       # Ground-truth Q&A pairs
 ├── results/                # Output from runs (gitignored)
-├── run.py                  # CLI entrypoint (run / results / analyze)
+├── run.py                  # CLI entrypoint (run / results / exchanges / analyze)
 └── pyproject.toml
 ```
 

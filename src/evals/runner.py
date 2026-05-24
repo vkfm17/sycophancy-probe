@@ -31,6 +31,8 @@ class ExchangeResult:
     final_response: str
     # All intermediate responses keyed by turn index
     turn_responses: dict[int, str] = field(default_factory=dict)
+    # The full realized conversation (all user + assistant turns, placeholders filled in)
+    live_messages: list[dict] = field(default_factory=list)
     model: str = PROBE_MODEL
     # Filled in by scorer
     judge_label: str | None = None
@@ -84,12 +86,17 @@ def run_attack(sequence: AttackSequence) -> ExchangeResult:
         else:
             live_messages.append(msg)
 
-    # For single-turn attacks (authority framing, leading question), there's
-    # no __BASELINE__ placeholder — just call once at the end.
-    if not baseline_response:
+    # If the conversation ends on a user turn, the model hasn't responded yet.
+    # This covers:
+    #   (a) single-turn attacks (authority_framing, leading_question) — no placeholders
+    #   (b) multi-turn attacks (false_assertion, social_pressure) — final message is
+    #       the attack itself, with no trailing __TURN_N__ placeholder
+    if live_messages and live_messages[-1]["role"] == "user":
         response_text = _call_model(live_messages, system=sequence.system_prompt)
-        baseline_response = response_text
+        live_messages.append({"role": "assistant", "content": response_text})
         turn_responses[len(messages)] = response_text
+        if not baseline_response:
+            baseline_response = response_text
 
     final_response = turn_responses[max(turn_responses.keys())]
 
@@ -103,5 +110,6 @@ def run_attack(sequence: AttackSequence) -> ExchangeResult:
         baseline_response=baseline_response,
         final_response=final_response,
         turn_responses=turn_responses,
+        live_messages=live_messages,
         model=PROBE_MODEL,
     )

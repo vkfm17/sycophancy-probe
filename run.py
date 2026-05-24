@@ -11,14 +11,15 @@ Usage:
 
 import json
 import os
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
 
 import typer
 from rich.console import Console
 from rich.table import Table
-from rich.progress import track
+from rich.progress import Progress, SpinnerColumn, BarColumn, TaskProgressColumn, TimeElapsedColumn, MofNCompleteColumn
 
 from src.config import RESULTS_DIR, DATA_DIR, PROBE_MODEL
 from src.redteam.attacks import QAPair, AttackType, build_all_attacks, ATTACK_REGISTRY
@@ -47,6 +48,7 @@ def result_to_dict(r: ExchangeResult) -> dict:
         "common_wrong_answer": r.common_wrong_answer,
         "baseline_response": r.baseline_response,
         "final_response": r.final_response,
+        "live_messages": r.live_messages,
         "model": r.model,
         "judge_label": r.judge_label,
         "judge_reasoning": r.judge_reasoning,
@@ -54,11 +56,27 @@ def result_to_dict(r: ExchangeResult) -> dict:
     }
 
 
+def _save_results(results: list[ExchangeResult], out_path: str) -> None:
+    """Write results to disk, atomically via a temp file."""
+    tmp_path = out_path + ".tmp"
+    with open(tmp_path, "w") as f:
+        json.dump([result_to_dict(r) for r in results], f, indent=2)
+    os.replace(tmp_path, out_path)
+
+
+def _run_one(seq) -> ExchangeResult:
+    """Run a single attack sequence and score it. Called from worker threads."""
+    result = run_attack(seq)
+    return score(result)
+
+
 @app.command()
 def run(
-    attack: Optional[str] = typer.Option(None, help="Run a single attack type only"),
-    limit: Optional[int] = typer.Option(None, help="Max number of Q&A pairs to run"),
-    output: Optional[str] = typer.Option(None, help="Output file path (default: results/<timestamp>.json)"),
+    attack: str | None = typer.Option(None, help="Run a single attack type only"),
+    limit: int | None = typer.Option(None, help="Max number of Q&A pairs to run"),
+    output: str | None = typer.Option(None, help="Output file path (default: results/<timestamp>.json)"),
+    checkpoint: int = typer.Option(10, help="Save to disk every N results (0 = only at end)"),
+    workers: int = typer.Option(8, help="Number of parallel workers"),
 ):
     """Run attacks and score responses."""
     qa_pairs = load_qa_pairs()
@@ -75,37 +93,64 @@ def run(
             console.print(f"Valid types: {[a.value for a in AttackType]}")
             raise typer.Exit(1)
 
-    console.print(f"\n[bold]SycophancyProbe[/bold] — model: [cyan]{PROBE_MODEL}[/cyan]")
-    console.print(f"Running {len(attack_types)} attack type(s) × {len(qa_pairs)} Q&A pairs\n")
+    # Build all sequences upfront so we know the total count
+    sequences = [
+        seq
+        for qa in qa_pairs
+        for seq in build_all_attacks(qa)
+        if seq.attack_type in attack_types
+    ]
 
-    results: list[ExchangeResult] = []
-
-    for qa in track(qa_pairs, description="Running attacks..."):
-        all_sequences = build_all_attacks(qa)
-        for seq in all_sequences:
-            if seq.attack_type not in attack_types:
-                continue
-            try:
-                result = run_attack(seq)
-                result = score(result)
-                results.append(result)
-            except Exception as e:
-                console.print(f"[red]Error on {qa.id} / {seq.attack_type}: {e}[/red]")
-
-    # Save results
+    # Determine output path up front so checkpoints go to the same file
     os.makedirs(RESULTS_DIR, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     out_path = output or f"{RESULTS_DIR}/{timestamp}.json"
-    with open(out_path, "w") as f:
-        json.dump([result_to_dict(r) for r in results], f, indent=2)
 
+    console.print(f"\n[bold]SycophancyProbe[/bold] — model: [cyan]{PROBE_MODEL}[/cyan]")
+    console.print(f"Running {len(sequences)} sequences ({len(attack_types)} attack type(s) × {len(qa_pairs)} Q&A pairs)")
+    console.print(f"Workers: {workers}  |  Checkpoint every: {checkpoint or '—'}  |  Output: [cyan]{out_path}[/cyan]\n")
+
+    results: list[ExchangeResult] = []
+    lock = threading.Lock()
+
+    progress = Progress(
+        SpinnerColumn(),
+        "[progress.description]{task.description}",
+        BarColumn(),
+        MofNCompleteColumn(),
+        TaskProgressColumn(),
+        TimeElapsedColumn(),
+        console=console,
+    )
+
+    with progress:
+        task_id = progress.add_task("Running attacks...", total=len(sequences))
+
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            futures = {executor.submit(_run_one, seq): seq for seq in sequences}
+
+            for future in as_completed(futures):
+                seq = futures[future]
+                try:
+                    result = future.result()
+                    with lock:
+                        results.append(result)
+                        if checkpoint and len(results) % checkpoint == 0:
+                            _save_results(results, out_path)
+                            progress.console.print(f"[dim]  ✓ checkpoint: {len(results)}/{len(sequences)} saved[/dim]")
+                except Exception as e:
+                    progress.console.print(f"[red]Error on {seq.qa_pair.id} / {seq.attack_type}: {e}[/red]")
+                finally:
+                    progress.advance(task_id)
+
+    _save_results(results, out_path)
     console.print(f"\n[green]Saved {len(results)} results → {out_path}[/green]")
     _print_summary(results)
 
 
 @app.command()
 def results(
-    path: Optional[str] = typer.Argument(None, help="Path to results JSON (default: latest in results/)")
+    path: str | None = typer.Argument(None, help="Path to results JSON (default: latest in results/)")
 ):
     """Print a summary table of a results file."""
     result_objects, _ = _load_results(path)
@@ -180,6 +225,7 @@ def _load_results(path: str | None) -> tuple[list[ExchangeResult], str]:
             common_wrong_answer=r["common_wrong_answer"],
             baseline_response=r["baseline_response"],
             final_response=r["final_response"],
+            live_messages=r.get("live_messages", []),
             model=r.get("model", "unknown"),
             judge_label=r.get("judge_label"),
             judge_reasoning=r.get("judge_reasoning"),
@@ -192,9 +238,9 @@ def _load_results(path: str | None) -> tuple[list[ExchangeResult], str]:
 
 @app.command()
 def analyze(
-    path: Optional[str] = typer.Argument(None, help="Path to results JSON (default: latest in results/)"),
+    path: str | None = typer.Argument(None, help="Path to results JSON (default: latest in results/)"),
     cluster: bool = typer.Option(True, help="Run embedding-based failure clustering"),
-    n_clusters: Optional[int] = typer.Option(None, help="Number of clusters (default: auto)"),
+    n_clusters: int | None = typer.Option(None, help="Number of clusters (default: auto)"),
     exemplars: bool = typer.Option(True, help="Show exemplar responses in cluster summary"),
 ):
     """Full analysis report: severity×frequency matrix, domain breakdown, clustering."""
@@ -209,6 +255,61 @@ def analyze(
             clustering = cluster_module.cluster_results(result_objects, n_clusters=n_clusters)
 
     report_module.full_report(result_objects, clustering=clustering)
+
+
+@app.command()
+def exchanges(
+    path: str | None = typer.Argument(None, help="Path to results JSON (default: latest in results/)"),
+    label: str | None = typer.Option(None, help="Filter by judge label (maintained/partial_cave/full_cave)"),
+    attack: str | None = typer.Option(None, help="Filter by attack type"),
+    limit: int | None = typer.Option(None, help="Max number of exchanges to show"),
+):
+    """Pretty-print the full conversation for each exchange."""
+    result_objects, _ = _load_results(path)
+
+    # Apply filters
+    if label:
+        result_objects = [r for r in result_objects if r.judge_label == label]
+    if attack:
+        result_objects = [r for r in result_objects if r.attack_type == attack]
+    if limit:
+        result_objects = result_objects[:limit]
+
+    if not result_objects:
+        console.print("[yellow]No results match your filters.[/yellow]")
+        return
+
+    LABEL_STYLE = {
+        "maintained": "bold green",
+        "partial_cave": "bold yellow",
+        "full_cave": "bold red",
+    }
+
+    for i, r in enumerate(result_objects, 1):
+        style = LABEL_STYLE.get(r.judge_label or "", "white")
+        console.rule(
+            f"[{style}]{i}/{len(result_objects)} · {r.qa_id} · {r.attack_type} · {r.judge_label}[/{style}]"
+        )
+        console.print(f"[dim]Domain:[/dim] {r.domain}   [dim]Correct answer:[/dim] {r.correct_answer}   [dim]Wrong answer pushed:[/dim] {r.common_wrong_answer}\n")
+
+        if r.live_messages:
+            for msg in r.live_messages:
+                role = msg.get("role", "")
+                content = msg.get("content", "")
+                if role == "user":
+                    console.print(f"[bold cyan]USER:[/bold cyan] {content}\n")
+                elif role == "assistant":
+                    console.print(f"[bold white]MODEL:[/bold white] {content}\n")
+        else:
+            # Fallback for older results that only have baseline/final
+            console.print(f"[bold cyan]USER:[/bold cyan] {r.question}\n")
+            console.print(f"[bold white]MODEL (baseline):[/bold white] {r.baseline_response}\n")
+            if r.final_response != r.baseline_response:
+                console.print(f"[bold white]MODEL (final):[/bold white] {r.final_response}\n")
+
+        if r.judge_reasoning:
+            console.print(f"[dim]Judge reasoning:[/dim] {r.judge_reasoning}")
+        console.print()
 
 
 if __name__ == "__main__":
