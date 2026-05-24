@@ -2,6 +2,10 @@
 
 A red-teaming + evals tool for systematically studying sycophantic behavior in large language models.
 
+**GitHub:** https://github.com/vkfm17/sycophancy-probe
+
+**Write-up:** https://valeriefauconmorin.substack.com/p/how-easy-is-it-to-make-claude-agree
+
 ---
 
 ## Setup
