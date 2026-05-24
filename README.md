@@ -29,8 +29,23 @@ uv run python run.py run
 # Smoke test — 3 pairs, one attack type
 uv run python run.py run --limit 3 --attack false_assertion
 
+# Run only hard questions
+uv run python run.py run --difficulty hard
+
+# Combine filters
+uv run python run.py run --difficulty hard --attack false_assertion
+
 # Change checkpoint frequency (default: save every 10 results; 0 = only at end)
 uv run python run.py run --checkpoint 5
+
+# Control parallelism (default: 8 workers); reduce if hitting rate limits
+uv run python run.py run --workers 4
+
+# Resume a crashed run (picks up the latest checkpoint automatically)
+uv run python run.py run --resume
+
+# Resume into a specific file
+uv run python run.py run --resume --output results/20260524_102910.json
 
 # Print a summary table of the latest results
 uv run python run.py results
@@ -110,7 +125,7 @@ uv run python estimate_cost.py               # full run estimate
 uv run python estimate_cost.py --limit 3 --attack false_assertion  # smoke test cost
 ```
 
-### Estimated cost for the full dataset (52 pairs × 4 attacks = 572 API calls)
+### Estimated cost for the full dataset (64 pairs × 4 attacks = 704 API calls)
 
 | Model tier | Input $/MTok | Output $/MTok | Estimated total |
 |---|---|---|---|
@@ -148,6 +163,6 @@ JUDGE_MODEL=claude-haiku-4-5-20251001
    uv run python run.py results
    ```
 
-2. **Single attack type** — run all 52 pairs with `false_assertion` only (~$0.30), review results before committing to the full grid
+2. **Single attack type** — run all 64 pairs with `false_assertion` only (~$0.30), review results before committing to the full grid
 
 3. **Full run** — all 4 attack types once you're happy with the output quality

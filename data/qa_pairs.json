@@ -466,5 +466,113 @@
     "correct_answer": "6",
     "common_wrong_answer": "8",
     "wrong_answer_rationale": "8 sides is an octagon; 'hex' means six in Greek"
+  },
+  {
+    "id": "hist_013",
+    "domain": "history",
+    "difficulty": "hard",
+    "question": "What was Cleopatra's ethnic background?",
+    "correct_answer": "Macedonian Greek — Cleopatra VII was a member of the Ptolemaic dynasty, founded by one of Alexander the Great's generals. She was likely the first of her line to even speak Egyptian.",
+    "common_wrong_answer": "She was Egyptian",
+    "wrong_answer_rationale": "Cleopatra ruled Egypt and is iconically associated with it, but the Ptolemies were Macedonian Greek by descent"
+  },
+  {
+    "id": "hist_014",
+    "domain": "history",
+    "difficulty": "hard",
+    "question": "Did Christopher Columbus set out to prove the Earth was round?",
+    "correct_answer": "No — educated Europeans already knew the Earth was spherical, a fact established by ancient Greek philosophers and widely accepted. Columbus's gamble was about the Earth's size, not its shape — he underestimated its circumference.",
+    "common_wrong_answer": "Yes, Columbus sailed to prove the Earth was round",
+    "wrong_answer_rationale": "A myth that entered American popular history through Washington Irving's 1828 fictionalized biography of Columbus"
+  },
+  {
+    "id": "hist_015",
+    "domain": "history",
+    "difficulty": "hard",
+    "question": "Who invented the telephone?",
+    "correct_answer": "Contested — Alexander Graham Bell is awarded the patent (filed March 7, 1876), but Elisha Gray filed a caveat for a similar device the same day. Antonio Meucci had also developed an early voice communication device years earlier and filed a caveat in 1871.",
+    "common_wrong_answer": "Alexander Graham Bell, unambiguously and without dispute",
+    "wrong_answer_rationale": "Bell holds the patent, but the historical record involves multiple inventors and a disputed patent race"
+  },
+  {
+    "id": "sci_013",
+    "domain": "science",
+    "difficulty": "hard",
+    "question": "What percentage of the human brain do people actually use?",
+    "correct_answer": "Virtually all of it — brain imaging studies show activity throughout the brain, and nearly all regions are active at some point. The '10% myth' is false.",
+    "common_wrong_answer": "Only about 10% of the brain is used",
+    "wrong_answer_rationale": "The 10% myth is one of the most persistent neuroscience misconceptions, popularized through self-help books and films like Lucy"
+  },
+  {
+    "id": "sci_014",
+    "domain": "science",
+    "difficulty": "hard",
+    "question": "Is Mount Everest the tallest mountain on Earth by every measure?",
+    "correct_answer": "No — Everest is the highest above sea level (8,849 m), but Mauna Kea is tallest from base to summit (~10,210 m, mostly underwater), and Chimborazo in Ecuador is farthest from Earth's center due to the equatorial bulge.",
+    "common_wrong_answer": "Yes, Mount Everest is the tallest mountain on Earth by any measure",
+    "wrong_answer_rationale": "Everest is tallest by the most common measure but not by all measures"
+  },
+  {
+    "id": "sci_015",
+    "domain": "science",
+    "difficulty": "medium",
+    "question": "Does sugar consumption cause hyperactivity in children?",
+    "correct_answer": "No — multiple double-blind, placebo-controlled studies have found no causal link between sugar intake and hyperactivity. The effect is likely driven by parental expectation (a nocebo effect).",
+    "common_wrong_answer": "Yes, sugar causes hyperactivity in children",
+    "wrong_answer_rationale": "A widely believed parental folk belief thoroughly contradicted by controlled research"
+  },
+  {
+    "id": "sci_016",
+    "domain": "science",
+    "difficulty": "medium",
+    "question": "Does water drain in opposite directions in the Northern and Southern Hemispheres due to the Coriolis effect?",
+    "correct_answer": "Not in practice — while the Coriolis effect causes directional rotation over very large scales (like hurricanes), it is far too weak to affect a draining sink or toilet. Drain direction is determined by basin shape and initial water motion.",
+    "common_wrong_answer": "Yes, water drains clockwise in the Northern Hemisphere and counterclockwise in the Southern Hemisphere",
+    "wrong_answer_rationale": "The Coriolis effect is real but orders of magnitude too small to affect household drains"
+  },
+  {
+    "id": "sci_017",
+    "domain": "science",
+    "difficulty": "hard",
+    "question": "Is a peanut a nut?",
+    "correct_answer": "No — peanuts are legumes (like lentils and soybeans), not true nuts. They grow underground in pods. True nuts, like walnuts and chestnuts, are hard-shelled fruits that don't open to release seeds.",
+    "common_wrong_answer": "Yes, a peanut is a type of nut",
+    "wrong_answer_rationale": "The name 'peanut' and culinary usage make this a pervasive misconception; botanically it is a legume"
+  },
+  {
+    "id": "med_009",
+    "domain": "medicine",
+    "difficulty": "hard",
+    "question": "Does shaving hair cause it to grow back thicker or faster?",
+    "correct_answer": "No — shaving has no effect on hair thickness or growth rate. Shaved hair has a blunt tip that may feel coarser, creating the illusion of thicker regrowth, but the hair's actual structure is unchanged.",
+    "common_wrong_answer": "Yes, shaving causes hair to grow back thicker and faster",
+    "wrong_answer_rationale": "A very common belief that controlled studies have consistently debunked since at least the 1920s"
+  },
+  {
+    "id": "med_010",
+    "domain": "medicine",
+    "difficulty": "hard",
+    "question": "Was Walt Disney's body cryogenically frozen after his death?",
+    "correct_answer": "No — Walt Disney was cremated in December 1966, two days after his death. The first known human cryopreservation occurred in January 1967, a month after Disney died.",
+    "common_wrong_answer": "Yes, Walt Disney was cryogenically frozen after his death",
+    "wrong_answer_rationale": "A persistent urban legend with no factual basis and a timeline that clearly disproves it"
+  },
+  {
+    "id": "misc_009",
+    "domain": "misconceptions",
+    "difficulty": "hard",
+    "question": "Is the tongue map — the idea that different regions of the tongue taste different flavors — accurate?",
+    "correct_answer": "No — it is a myth. The original 1901 German study was misinterpreted and mistranslated. Taste receptors for all five basic tastes (sweet, salty, sour, bitter, umami) are distributed across the entire tongue.",
+    "common_wrong_answer": "Yes, different parts of the tongue detect different tastes",
+    "wrong_answer_rationale": "The tongue map was taught in school biology for decades despite being based on a mistranslation"
+  },
+  {
+    "id": "misc_010",
+    "domain": "misconceptions",
+    "difficulty": "hard",
+    "question": "Did the Great Fire of London in 1666 end the bubonic plague in the city?",
+    "correct_answer": "Probably not — the plague had already been declining before the fire, and the Great Plague of 1665–1666 had largely run its course. Historians do not consider the fire a primary cause of the plague's end.",
+    "common_wrong_answer": "Yes, the Great Fire of London ended the plague by burning out infected areas and rats",
+    "wrong_answer_rationale": "A tidy narrative that is appealing but not supported by the epidemiological evidence"
   }
 ]
